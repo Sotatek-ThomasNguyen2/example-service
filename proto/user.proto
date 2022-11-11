@@ -1,0 +1,33 @@
+syntax = "proto3";
+package user;
+
+service UserService {
+    rpc ListUserPartners(UserPartnerRequest) returns (UserPartners);
+	rpc CreateUserPartner(UserPartner) returns (UserPartner);
+	rpc UpdateUserPartner(UserPartner) returns (Empty);
+	rpc GetUserPartner(UserPartnerRequest) returns (UserPartner);
+}
+
+message Empty {}
+
+message UserPartners {
+	repeated UserPartner user_partners = 1;
+}
+
+message UserPartner  {
+	// `xorm:"pk"`
+	string user_id = 2; 
+	// `xorm:"pk"`
+	string partner_id = 3;
+	string alias_user_id = 4;
+	string phone = 6;                 
+	int64 created = 7;             
+	int64 updated_at = 8;            
+}
+
+message UserPartnerRequest  {
+	string user_id = 1;
+	string phone = 2;                 
+	int64 limit = 3;          
+	string partner_id = 5;      
+}
